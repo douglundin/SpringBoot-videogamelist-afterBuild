@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video Game List</title>
+  <link rel="stylesheet" th:href="@{/style.css}"></link>
+</head>
+
+<body>
+<h2>Your Video Game List</h2>
+<div th:unless="${#lists.isEmpty(videogames)}">
+  <dl th:each="videogame : ${videogames}">
+    <dt class="videoGameHeadline">
+      <span th:text="${videogame.title}">Title</span>(Serial Nbr:
+      <span th:text="${videogame.serialnbr}">Serial Nbr</span>)
+    </dt>
+    <dd class="videoGameDescription">
+      <span th:if="${videogame.description}" th:text="${videogame.description}">Description</span>
+      <span th:if="${videogame.description eq null}">No description available</span>
+    </dd>
+  </dl>
+</div>
+<div th:if="${#lists.isEmpty(videogames)}">
+  <p>You have no video games in your video game list</p>
+</div>
+
+<hr/>
+
+<h3>Add a video game</h3>
+<form method="POST">
+  <label for="title">Title:</label>
+  <input type="text" name="title" size="50"></input><br/>
+  <label for="serialnbr">Serial Nbr:</label>
+  <input type="text" name="serialnbr" size="15"></input><br/>
+  <label for="description">Description:</label><br/>
+  <textarea name="description" cols="80" rows="5"></textarea><br/>
+  <input type="submit"></input>
+</form>
+</body>
+
+</html>
